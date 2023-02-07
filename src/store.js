@@ -1,5 +1,8 @@
 import { reactive } from 'vue';
 
 export const store = reactive({
-    results: []
+    results: [],
+    nameValue: '',
+    statusValue: '',
+    loading: false
 });

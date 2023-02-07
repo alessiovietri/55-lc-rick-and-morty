@@ -1,6 +1,7 @@
 <script>
-import CharacterCard from './CharacterCard.vue';
 import { store } from '../store.js';
+import CharacterCard from './CharacterCard.vue';
+import AppLoader from './AppLoader.vue';
 
 export default {
     name: 'AppMain',
@@ -10,7 +11,8 @@ export default {
         }
     },
     components: {
-        CharacterCard
+        CharacterCard,
+        AppLoader
     }
 }
 </script>
@@ -18,7 +20,8 @@ export default {
 <template>
 
     <main class="py-3">
-        <div class="container">
+        <AppLoader v-if="store.loading" />
+        <div v-else class="container">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
                 <div class="col text-center" v-for="character in store.results">
                     <CharacterCard :character="character" />

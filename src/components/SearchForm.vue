@@ -1,23 +1,40 @@
 <script>
+import { store } from '../store.js';
+
 export default {
-    name: 'SearchForm'
+    name: 'SearchForm',
+    data() {
+        return {
+            store
+        };
+    }
 }
 </script>
 
 <template>
     
     <div class="w-50 mx-auto d-flex justify-content-center">
-        <form action="">
+        <form action="" @submit.prevent="$emit('search')">
             <div class="row">
                 <div class="col-auto">
-                    <input type="text" class="form-control" placeholder="Search character" aria-label="Search character">
+                    <input
+                        type="text"
+                        v-model="store.nameValue"
+                        name="name"
+                        class="form-control"
+                        placeholder="Search character"
+                        aria-label="Search character">
                 </div>
                 <div class="col-auto">
-                    <select class="form-select" aria-label="Select status">
-                        <option selected>Select status</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select
+                        v-model="store.statusValue"
+                        name="status"
+                        class="form-select"
+                        aria-label="Select status">
+                        <option selected value="">Select status</option>
+                        <option value="alive">Alive</option>
+                        <option value="dead">Dead</option>
+                        <option value="unknown">Unknown</option>
                     </select>
                 </div>
                 <div class="col-auto">
@@ -26,7 +43,7 @@ export default {
                     </button>
                 </div>
                 <div class="col-auto">
-                    <button type="reset" class="btn btn-warning">
+                    <button type="reset" @click="$emit('clear')" class="btn btn-warning">
                         Reset
                     </button>
                 </div>
